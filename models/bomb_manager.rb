@@ -8,28 +8,31 @@ class BombManager
 		@explosion_range # => Quantidade em blocos do range da explosao
 	end
 
-	def plantedBombsQuantity
+	def planted_bombs_quantity
 		@planted_bombs_quantity
 	end
 
-	def plantedBombsLimit action=''
-		@planted_bomb_limit ++ if action == :increment
-		@planted_bomb_limit -- if action == :decrement
+	def planted_bombs_limit action=''
+		@planted_bomb_limit += 1 if action == :increment
+		@planted_bomb_limit -= 1 if action == :decrement
 		@planted_bomb_limit unless action
 	end
 
-	def plantBomb
+	def plant_bomb
 		# => Adicionar no array de bombas
-		bomb = Bomb.new(player)
-
+		bomb = Bomb.new(@player)
+		Thread.start{
+			sleep 2
+			bomb.explode @range
+		}
 		# => Criar thread para contagem regressiva
 		# => Explodir 
 
 	end
 
 	def range action=:increment
-		@explosion_range ++ if action == :increment
-		@explosion_range -- if action == :decrement
+		@explosion_range += 1 if action == :increment
+		@explosion_range -= 1 if action == :decrement
 		@explosion_range unless action
 	end
 end
