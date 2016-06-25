@@ -5,6 +5,7 @@ class Bomb
 		@x,	@y = player.x, player.y
 		@image = Gosu::Image.new player.window, "assets/images/bomba/bombas_1.png"
 		@sprite = Gosu::Image.load_tiles(player.window, "assets/images/bomba/bombas_1.png", @image.width/4, @image.height, true)
+                @sound_exposion = Gosu::Sample("assets/audio/Bomb-Explosion.wav")
 		@image_slice = @sprite[0]
 		# => Desenhar bomba na tela em x,y
 
